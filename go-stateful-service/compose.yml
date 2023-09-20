@@ -1,0 +1,68 @@
+version: '3.9'
+
+services:
+    app1:
+        restart: always
+        build:
+            context: .
+            dockerfile: Dockerfile
+        environment:
+            RAFT_PATH: /app/data
+            RAFT_ADDR: app1:9000
+            RAFT_ID: node1
+            RAFT_NODE_ADDRS: node1@app1:9000,node2@app2:9000,node3@app3:9000
+            SERVER_ADDR: :4000
+        expose:
+            - '4000'
+            - '9000'
+        volumes:
+            - app1_data:/app/data
+
+    app2:
+        restart: always
+        build:
+            context: .
+            dockerfile: Dockerfile
+        environment:
+            RAFT_PATH: /app/data
+            RAFT_ADDR: app2:9000
+            RAFT_ID: node2
+            RAFT_NODE_ADDRS: node1@app1:9000,node2@app2:9000,node3@app3:9000
+            SERVER_ADDR: :4000
+        expose:
+            - '4000'
+            - '9000'
+        volumes:
+            - app2_data:/app/data
+
+    app3:
+        restart: always
+        build:
+            context: .
+            dockerfile: Dockerfile
+        environment:
+            RAFT_PATH: /app/data
+            RAFT_ADDR: app3:9000
+            RAFT_ID: node3
+            RAFT_NODE_ADDRS: node1@app1:9000,node2@app2:9000,node3@app3:9000
+            SERVER_ADDR: :4000
+        expose:
+            - '4000'
+            - '9000'
+        volumes:
+            - app3_data:/app/data
+
+    haproxy:
+        image: haproxy
+        volumes:
+            - ./haproxy.cfg:/usr/local/etc/haproxy/haproxy.cfg:ro
+        ports:
+            - '8081:80'
+        depends_on:
+            - app1
+            - app2
+
+volumes:
+    app1_data:
+    app2_data:
+    app3_data:

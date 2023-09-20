@@ -1,0 +1,24 @@
+# Ignore git files
+.git
+.gitignore
+README.md
+
+# Ignore Go binaries
+*.exe
+*.exe~
+*.dll
+*.so
+*.dylib
+
+# Ignore test binaries
+*.test
+
+# Ignore coverage output
+*.out
+
+# Ignore Docker Compose file
+compose.yml
+Dockerfile
+
+# Ignore VS Code files
+.vscode

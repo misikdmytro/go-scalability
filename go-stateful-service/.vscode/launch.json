@@ -1,0 +1,23 @@
+{
+    // Use IntelliSense to learn about possible attributes.
+    // Hover to view descriptions of existing attributes.
+    // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "Launch Package",
+            "type": "go",
+            "request": "launch",
+            "mode": "auto",
+            "program": "${fileDirname}",
+            "env": {
+                "RAFT_PATH": "tmp",
+                "RAFT_ADDR": "127.0.0.1:9005",
+                "RAFT_ID": "node1",
+                "RAFT_NODE_ADDRS": "node1@127.0.0.1:9005,node2@127.0.0.1:9006",
+
+                "SERVER_ADDR": ":4000",
+            }
+        }
+    ]
+}

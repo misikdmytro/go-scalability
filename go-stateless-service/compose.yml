@@ -1,0 +1,58 @@
+version: '3.9'
+
+services:
+    app1:
+        restart: always
+        build:
+            context: .
+            dockerfile: Dockerfile
+        environment:
+            REDIS_ADDR: redis:6379
+        expose:
+            - '4000'
+        depends_on:
+            - redis
+
+    app2:
+        restart: always
+        build:
+            context: .
+            dockerfile: Dockerfile
+        environment:
+            REDIS_ADDR: redis:6379
+        expose:
+            - '4000'
+        depends_on:
+            - redis
+
+    app3:
+        restart: always
+        build:
+            context: .
+            dockerfile: Dockerfile
+        environment:
+            REDIS_ADDR: redis:6379
+        expose:
+            - '4000'
+        depends_on:
+            - redis
+
+    haproxy:
+        image: haproxy
+        volumes:
+            - ./haproxy.cfg:/usr/local/etc/haproxy/haproxy.cfg:ro
+        ports:
+            - '8081:80'
+        depends_on:
+            - app1
+            - app2
+
+    redis:
+        image: redis:7
+        volumes:
+            - redis-data:/data
+        expose:
+            - '6379'
+
+volumes:
+    redis-data:
