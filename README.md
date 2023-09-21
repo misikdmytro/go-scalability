@@ -6,7 +6,7 @@ Application code describe in [this Medium post](https://medium.com/@dmytro.misik
 
 ### Prerequisites
 
-- [Docker Composer](https://docs.docker.com/compose/install/)
+- [Docker Compose](https://docs.docker.com/compose/install/)
 
 ### Run
 
