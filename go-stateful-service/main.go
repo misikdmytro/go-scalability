@@ -88,6 +88,10 @@ func main() {
 
 	app := fiber.New()
 
+	app.Get("/health", func(c *fiber.Ctx) error {
+		return c.SendStatus(fiber.StatusOK)
+	})
+
 	app.Get("/leader", func(c *fiber.Ctx) error {
 		state := raftNode.State()
 		if state != raft.Leader {
